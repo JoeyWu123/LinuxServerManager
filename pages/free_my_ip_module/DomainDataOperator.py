@@ -14,8 +14,8 @@ class DomainDataOperator():
         self._file_lock = FileLock(self._file_lock_path, timeout=60)
         dir_list = os.listdir(free_my_ip_service_path)
         if ("DomainData.csv" not in dir_list):
-            initial_data_frame = pd.DataFrame(columns=["FreeMyIP Domain Name", "Full Domain", "Token", "Domain Type", "IP Address", "TXT Record"])
-            self.write_domain_data_to_csv(initial_data_frame)
+            self._domain_data = pd.DataFrame(columns=["FreeMyIP Domain Name", "Full Domain", "Token", "Domain Type", "IP Address", "TXT Record"])
+            self.write_domain_data_to_csv()
         self._domain_data = self.read_domain_data_from_csv()
 
     def insert_or_override_domain_data(self, domain_name, token, domain_type, ip="", txt_record=""):
